@@ -36,7 +36,7 @@ export default {
     },
     saveModel(){
       console.log(this.models)
-      this.models.push({ radius:this.radius, height:this.height, radialSegments:this.radialSegments,'index':this.models.length+1})
+      this.models.push({ radius:this.radius, height:this.height, radialSegments:this.radialSegments,'index':Math.random()})
     },
     preventCamRotation(){
       //not sure if this part have sense but seems to b working
@@ -58,10 +58,11 @@ export default {
         document.getElementById('render').removeChild(document.querySelector('canvas'))
         this.init()
       },
-    triangulate(i){
-         //this.radius = this.models[i].radius
-         console.log[i]
-        // console.log(this.models[i+1])
+    triangulate(model){
+         this.height = model.height
+         this.radius = model.radius
+         this.radialSegments = model.radialSegments
+         this.getTriangulation()
       },
  
     init() {
@@ -138,7 +139,7 @@ export default {
         </div></div></form>
         <button @click="saveModel()">Save model</button>
         <ul v-for="model in models" :key="model.index">
-          <li><button @click="triangulate(model.index)">Render</button>{{` Radius:${model.radius}, Height:${model.height}, Radial segments:${model.radialSegments}`}}</li>
+          <li><button @click="triangulate(model)">Render</button>{{` Radius:${model.radius}, Height:${model.height}, Radial segments:${model.radialSegments}`}}</li>
         </ul>
 
 	    </div>
